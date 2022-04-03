@@ -1,20 +1,65 @@
 package com.duong.controller;
 
+import com.duong.model.Classes;
+import com.duong.service.Clasees.ClassesService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "ClassesServlet", value = "/ClassesServlet")
 public class ClassesServlet extends HttpServlet {
+    private ClassesService classesService;
+
+    public void init() {
+        classesService = new ClassesService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        try {
+            switch (action) {
+                case "create":
+                    showNewForm(request, response);
+                    break;
+                default:
+                    listClasses(request,response);
+            }
+        } catch (SQLException e) {
+            throw new ServletException(e);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/create.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listClasses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        List<Classes> listClasses = classesService.selectAll();
+        request.setAttribute("listClasses", listClasses);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void insertClasses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        Classes classes = new Classes(name, description);
+        classesService.insert(classes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/create.jsp");
+        dispatcher.forward(request, response);
     }
 }
