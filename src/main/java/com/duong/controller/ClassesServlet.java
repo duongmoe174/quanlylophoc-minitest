@@ -26,6 +26,9 @@ IClassesService classesService = new ClassesService();
                 case "create":
                     showNewForm(request, response);
                     break;
+                case "delete":
+                    deleteClasses(request,response);
+                    break;
                 default:
                     listClasses(request, response);
             }
@@ -71,4 +74,14 @@ IClassesService classesService = new ClassesService();
         RequestDispatcher dispatcher = request.getRequestDispatcher("classes/create.jsp");
         dispatcher.forward(request, response);
     }
+
+private void deleteClasses (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+int id = Integer.parseInt(request.getParameter("id"));
+classesService.delete(id);
+
+List<Classes> listClasses = classesService.selectAll();
+request.setAttribute("listClasses", listClasses);
+RequestDispatcher dispatcher = request.getRequestDispatcher("classes/list.jsp");
+dispatcher.forward(request,response);
+}
 }

@@ -34,7 +34,7 @@
                 <td><c:out value="${classes.description}"/></td>
                 <td>
                     <a href="">Edit</a>
-                    <a href="">Delete</a>
+                    <a href="classes?action=delete&id=${classes.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

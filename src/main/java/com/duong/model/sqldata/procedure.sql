@@ -22,3 +22,10 @@ select name,description from classes
     where id = classes_id;
 end //
 DELIMITER  ;
+
+DELIMITER //
+create procedure deleteClasses (IN classes_id int)
+begin
+    delete from classes where id = classes_id;
+end //
+DELIMITER ;

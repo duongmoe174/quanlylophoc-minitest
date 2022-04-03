@@ -51,11 +51,11 @@ public class ClassesService implements IClassesService {
     @Override
     public Classes getById(int id) {
         Classes classes = null;
-        String query = "{CALL getClassesById (?)}";
+        String query = "{CALL getClassesById(?)}";
         try (CallableStatement callableStatement = connection.prepareCall(query)) {
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
                 classes = new Classes(name, description);
@@ -64,5 +64,18 @@ public class ClassesService implements IClassesService {
             e.printStackTrace();
         }
         return classes;
+    }
+
+    @Override
+    public boolean delete(int id) throws SQLException {
+        boolean rowDelete;
+        String query = "{CALL deleteClasses(?)}";
+        try (
+                CallableStatement callableStatement = connection.prepareCall(query);
+        ) {
+            callableStatement.setInt(1, id);
+            rowDelete = callableStatement.executeUpdate() > 0;
+        }
+        return rowDelete;
     }
 }
