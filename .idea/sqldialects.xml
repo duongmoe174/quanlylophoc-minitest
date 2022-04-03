@@ -3,5 +3,9 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/duong/model/sqldata/procedure.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/duong/model/sqldata/quanlystudent.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/duong/service/Clasees/ClassesService.java" dialect="MySQL" />
+  </component>
+  <component name="SqlResolveMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/duong/service/Clasees/ClassesService.java" scope="{&quot;node&quot;:{  &quot;@negative&quot;:&quot;1&quot;,  &quot;group&quot;:{   &quot;@kind&quot;:&quot;root&quot;,   &quot;node&quot;:{    &quot;name&quot;:{     &quot;@qname&quot;:&quot;9cdc2974-e329-4b8b-befa-32ca9f638149&quot;    },    &quot;group&quot;:{     &quot;@kind&quot;:&quot;schema&quot;,     &quot;node&quot;:{      &quot;name&quot;:{       &quot;@qname&quot;:&quot;quanlylophoc&quot;      }     }    }   }  } }}" />
   </component>
 </project>

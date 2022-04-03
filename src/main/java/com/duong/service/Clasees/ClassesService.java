@@ -3,10 +3,7 @@ package com.duong.service.Clasees;
 import com.duong.config.ConnectionJDBC;
 import com.duong.model.Classes;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class ClassesService implements IClassesService {
     @Override
     public List<Classes> selectAll() {
         List<Classes> classesList = new ArrayList<>();
-        String query = "{CALL selectAllClasses}";
+        String query = "{CALL selectAllClasses()}";
         try (CallableStatement callableStatement = connection.prepareCall(query)) {
             ResultSet resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {

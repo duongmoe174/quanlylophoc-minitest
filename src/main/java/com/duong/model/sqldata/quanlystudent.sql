@@ -22,3 +22,6 @@ create table student_classes (
                                  foreign key (student_id) references Student(id),
                                  foreign key (classes_id) references classes(id)
 );
+
+insert into classes (name, description)values ('PHP', 'dao tao lap trinh vien PHP');
+insert into classes (name, description)values ('Python', 'dao tao lap trinh vien Python');

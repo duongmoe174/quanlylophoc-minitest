@@ -2,22 +2,19 @@ package com.duong.controller;
 
 import com.duong.model.Classes;
 import com.duong.service.Clasees.ClassesService;
+import com.duong.service.Clasees.IClassesService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ClassesServlet", value = "/ClassesServlet")
+@WebServlet(name = "ClassesServlet", value = "/classes")
 public class ClassesServlet extends HttpServlet {
-    private ClassesService classesService;
-
-    public void init() {
-        classesService = new ClassesService();
-    }
-
+IClassesService classesService = new ClassesService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -30,7 +27,7 @@ public class ClassesServlet extends HttpServlet {
                     showNewForm(request, response);
                     break;
                 default:
-                    listClasses(request,response);
+                    listClasses(request, response);
             }
         } catch (SQLException e) {
             throw new ServletException(e);
@@ -39,7 +36,19 @@ public class ClassesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        try {
+            switch (action) {
+                case "create":
+                    insertClasses(request, response);
+                    break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
