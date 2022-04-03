@@ -96,7 +96,6 @@ public class ClassesServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-
         Classes classes = new Classes(id, name, description);
         classesService.update(classes);
         RequestDispatcher dispatcher = request.getRequestDispatcher("classes/edit.jsp");

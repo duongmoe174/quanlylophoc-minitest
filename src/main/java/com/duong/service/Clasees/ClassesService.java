@@ -82,13 +82,12 @@ public class ClassesService implements IClassesService {
     @Override
     public boolean update(Classes classes) throws SQLException {
         boolean rowUpdate;
-        String query = "update classes set name = ?, description = ? where id = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, classes.getName());
-            preparedStatement.setString(2, classes.getDescription());
-            preparedStatement.setInt(3, classes.getId());
-
-            rowUpdate = preparedStatement.executeUpdate() > 0;
+        String query = "{CALL updateClasses(?,?,?)}";
+        try (CallableStatement callableStatement = connection.prepareCall(query)) {
+           callableStatement.setInt(1, classes.getId());
+           callableStatement.setString(2, classes.getName());
+           callableStatement.setString(3, classes.getDescription());
+           rowUpdate = callableStatement.executeUpdate() > 0;
         }
         return rowUpdate;
     }

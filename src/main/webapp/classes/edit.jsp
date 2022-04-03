@@ -35,7 +35,7 @@
             </tr>
             <tr>
                 <th>Class description</th>
-                <td><input type="text" name="name" , size="50" value="<c:out value='${classes.getDescription()}' />"></td>
+                <td><input type="text" name="description" , size="50" value="<c:out value='${classes.description}' />"></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
