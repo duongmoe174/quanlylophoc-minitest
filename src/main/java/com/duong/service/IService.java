@@ -8,4 +8,5 @@ List<T> selectAll();
 void insert(T t);
 T getById (int id);
 boolean delete (int id) throws SQLException;
+boolean update (T t) throws SQLException;
 }

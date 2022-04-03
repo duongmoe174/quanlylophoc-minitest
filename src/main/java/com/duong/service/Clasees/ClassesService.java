@@ -78,4 +78,18 @@ public class ClassesService implements IClassesService {
         }
         return rowDelete;
     }
+
+    @Override
+    public boolean update(Classes classes) throws SQLException {
+        boolean rowUpdate;
+        String query = "update classes set name = ?, description = ? where id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, classes.getName());
+            preparedStatement.setString(2, classes.getDescription());
+            preparedStatement.setInt(3, classes.getId());
+
+            rowUpdate = preparedStatement.executeUpdate() > 0;
+        }
+        return rowUpdate;
+    }
 }

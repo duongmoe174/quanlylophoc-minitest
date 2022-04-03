@@ -33,7 +33,7 @@
                 <td><c:out value="${classes.name}"/></td>
                 <td><c:out value="${classes.description}"/></td>
                 <td>
-                    <a href="">Edit</a>
+                    <a href="classes?action=edit&id=${classes.id}">Edit</a>
                     <a href="classes?action=delete&id=${classes.id}">Delete</a>
                 </td>
             </tr>

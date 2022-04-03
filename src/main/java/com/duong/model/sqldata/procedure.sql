@@ -29,3 +29,15 @@ begin
     delete from classes where id = classes_id;
 end //
 DELIMITER ;
+
+DELIMITER //
+create procedure updateClasses (
+IN classes_id int,
+IN classes_name varchar(50),
+IN classes_description varchar(500)
+)
+begin
+update classes set name = classes_name, description = classes_description
+    where id = classes_id;
+end //
+DELIMITER ;

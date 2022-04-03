@@ -14,7 +14,8 @@ import java.util.List;
 
 @WebServlet(name = "ClassesServlet", value = "/classes")
 public class ClassesServlet extends HttpServlet {
-IClassesService classesService = new ClassesService();
+    IClassesService classesService = new ClassesService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -27,7 +28,10 @@ IClassesService classesService = new ClassesService();
                     showNewForm(request, response);
                     break;
                 case "delete":
-                    deleteClasses(request,response);
+                    deleteClasses(request, response);
+                    break;
+                case "edit":
+                    showEditForm(request,response);
                     break;
                 default:
                     listClasses(request, response);
@@ -47,6 +51,9 @@ IClassesService classesService = new ClassesService();
             switch (action) {
                 case "create":
                     insertClasses(request, response);
+                    break;
+                case "edit":
+                    updateClasses(request,response);
                     break;
             }
         } catch (SQLException e) {
@@ -75,13 +82,32 @@ IClassesService classesService = new ClassesService();
         dispatcher.forward(request, response);
     }
 
-private void deleteClasses (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-int id = Integer.parseInt(request.getParameter("id"));
-classesService.delete(id);
+    private void deleteClasses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        classesService.delete(id);
 
-List<Classes> listClasses = classesService.selectAll();
-request.setAttribute("listClasses", listClasses);
-RequestDispatcher dispatcher = request.getRequestDispatcher("classes/list.jsp");
-dispatcher.forward(request,response);
-}
+        List<Classes> listClasses = classesService.selectAll();
+        request.setAttribute("listClasses", listClasses);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void updateClasses(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+
+        Classes classes = new Classes(id, name, description);
+        classesService.update(classes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Classes existingClasses = classesService.getById(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("classes/edit.jsp");
+        request.setAttribute("classes", existingClasses);
+        dispatcher.forward(request, response);
+    }
 }
