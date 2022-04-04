@@ -1,4 +1,4 @@
-package com.duong.service.Clasees;
+package com.duong.service.clasees;
 
 import com.duong.model.Classes;
 import com.duong.service.IService;
