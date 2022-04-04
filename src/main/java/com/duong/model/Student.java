@@ -7,24 +7,24 @@ public class Student {
     private String firstname;
     private String lastname;
     private String address;
-    private List<Classes> classesList;
+    private Classes classes;
 
     public Student() {
     }
 
-    public Student(int id, String firstname, String lastname, String address, List<Classes> classesList) {
+    public Student(int id, String firstname, String lastname, String address, Classes classes) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.classesList = classesList;
+        this.classes = classes;
     }
 
-    public Student(String firstname, String lastname, String address, List<Classes> classesList) {
+    public Student(String firstname, String lastname, String address, Classes classes) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
-        this.classesList = classesList;
+        this.classes = classes;
     }
 
     public int getId() {
@@ -59,11 +59,11 @@ public class Student {
         this.address = address;
     }
 
-    public List<Classes> getClassesList() {
-        return classesList;
+    public Classes getClasses() {
+        return classes;
     }
 
-    public void setClassesList(List<Classes> classesList) {
-        this.classesList = classesList;
+    public void setClasses(Classes classes) {
+        this.classes = classes;
     }
 }
