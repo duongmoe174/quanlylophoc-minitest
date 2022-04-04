@@ -12,15 +12,15 @@ public class Student {
     public Student() {
     }
 
-    public Student(String firstname, String lastname, String address, List<Classes> classesList) {
+    public Student(int id, String firstname, String lastname, String address, List<Classes> classesList) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.classesList = classesList;
     }
 
-    public Student(int id, String firstname, String lastname, String address, List<Classes> classesList) {
-        this.id = id;
+    public Student(String firstname, String lastname, String address, List<Classes> classesList) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
