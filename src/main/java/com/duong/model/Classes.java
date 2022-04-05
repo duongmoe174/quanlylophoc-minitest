@@ -14,6 +14,11 @@ public class Classes {
         this.description = description;
     }
 
+    public Classes(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Classes(String name, String description) {
         this.name = name;
         this.description = description;
